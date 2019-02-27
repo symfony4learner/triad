@@ -1,0 +1,117 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Convert Your Files Easily!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Convert Your Files Easily! ✅</h1>
+
+   <form id="myform">
+	    <div class="form-group">
+		  <input type="file" class="form-control-file" id="input" name="input">
+	    </div>
+	    <div classs="form-group">
+	 	<div class="row">
+		    <div class="col">
+		   		<label for="output">Name of Output File:</label>
+		      	<input type="text" id="output" class="form-control" name="output" placeholder="Output name">
+		    </div>
+		    <div class="col">
+		    <label for="output-format">Extension:</label>
+			<select class="custom-select" id="output-format" name="output-format">
+			  	<option value="" selected>Convert to</option>
+				<option value="pdf">pdf</option>
+				<option value="asciidoc">asciidoc</option>
+				<option value="beamer">beamer</option>
+				<option value="commonmark">commonmark</option>
+				<option value="context">context</option>
+				<option value="docbook">docbook</option>
+				<option value="docbook4">docbook4</option>
+				<option value="docbook5">docbook5</option>
+				<option value="docx">docx</option>
+				<option value="dokuwiki">dokuwiki</option>
+				<option value="dzslides">dzslides</option>
+				<option value="epub">epub</option>
+				<option value="epub2">epub2</option>
+				<option value="epub3">epub3</option>
+				<option value="fb2">fb2</option>
+				<option value="gfm">gfm</option>
+				<option value="haddock">haddock</option>
+				<option value="html">html</option>
+				<option value="html4">html4</option>
+				<option value="html5">html5</option>
+				<option value="icml">icml</option>
+				<option value="jats">jats</option>
+				<option value="json">json</option>
+				<option value="latex">latex</option>
+				<option value="man">man</option>
+				<option value="markdown">markdown</option>
+				<option value="markdown_github">markdown_github</option>
+				<option value="markdown_mmd">markdown_mmd</option>
+				<option value="markdown_phpextra">markdown_phpextra</option>
+				<option value="markdown_strict">markdown_strict</option>
+				<option value="mediawiki">mediawiki</option>
+				<option value="ms">ms</option>
+				<option value="muse">muse</option>
+				<option value="native">native</option>
+				<option value="odt">odt</option>
+				<option value="opendocument">opendocument</option>
+				<option value="opml">opml</option>
+				<option value="org">org</option>
+				<option value="plain">plain</option>
+				<option value="pptx">pptx</option>
+				<option value="revealjs">revealjs</option>
+				<option value="rst">rst</option>
+				<option value="rtf">rtf</option>
+				<option value="s5">s5</option>
+				<option value="slideous">slideous</option>
+				<option value="slidy">slidy</option>
+				<option value="tei">tei</option>
+				<option value="texinfo">texinfo</option>
+				<option value="textile">textile</option>
+				<option value="zimwiki">zimwiki</option>
+			</select>	
+			</div>
+		</div>    
+	</div>
+	<hr />
+	<div class="form-group">
+		<button class="btn btn-block btn-primary" type="button" id="go">Convert Now</button>
+	</div>
+	</form>
+<div id="results"></div>
+</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+	  $(document).on('click', '#go', function(){
+
+	  		var form = document.getElementById("myform");
+
+			$.ajax({
+	        url:'{{path("execute")}}',
+	        type: "POST",
+	        contentType:false,
+			processData:false,
+			cache:false,
+	        dataType: "json",
+	        data: new FormData(form),
+	        async: true,
+	        success: function (data)
+	        {
+	        	$("#results").html(data);
+	        },
+		    error: function (xhr, status, error) {
+				console.log(error);
+		    }
+	    });
+
+	  });
+	</script>
+
+{% endblock javascripts %}

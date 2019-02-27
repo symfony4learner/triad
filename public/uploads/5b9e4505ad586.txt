@@ -1,0 +1,88 @@
+Trying out simplenote
+
+This is a nice title
+==============
+******************
+
+and this is content below the nice title.
+
+
+First header
+============
+# First header
+
+Second header
+-----------------------
+## Second header
+
+### Third header
+#### Fourth header
+##### Fifth header
+###### Sixth header
+
+
+*italics*
+
+> Block quote starts here
+> and continues...
+> and ends here.
+> > and a nested one
+> I thought it was ended...
+>
+> not yet though
+
+Making lists
+--------------------
+
+Here's a shopping list:
+* shoe polish
+* toothbrush
+* school bag
+* etc
+
+
+### and an ordered list
+1. Tomatoes
+2. Lemons
+3. Water melon
+
+Code blocks
+-------------------
+
+use pre
+<pre>
+	this is code
+		and code
+	and code
+</pre>
+end of code
+using tabs or four spaces: 
+
+	another code
+	and another
+
+I can also write `code` within a paragraph.
+
+Links
+---------
+
+Please visit [The New Walk website](http://thenewwalk.org/ "The new walk") today
+
+Emphasis
+ 
+* single asterisks*
+* *double asterisks**
+_single underscores_
+__double underscores__
+
+
+
+This app looks nice. Let me try whether I can add an image.
+I love this ![Image](https://www.gstatic.com/webp/gallery3/1.sm.png "Optional title" )
+
+Export to pdf
+pandoc simplenote.md -s -o simplenote.pdf
+
+
+Tags:
+  export, pdf, Sample, Template

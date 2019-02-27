@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Triad Generator{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+	table {
+	  font-family: arial, sans-serif;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+
+	td, th {
+	  border: 1px solid #dddddd;
+	  text-align: left;
+	  padding: 8px;
+	}
+
+	tr:nth-child(even) {
+	  background-color: #dddddd;
+	}
+
+</style>
+
+<div class="example-wrapper">
+    <h1>Triad Generator</h1>
+
+    Select a chord to display its triad family:
+
+<select id="details">
+  <option value="3_major_sharp" selected >Select Key</option>
+  <option value="0_major_sharp">A Major</option>
+  <option value="0_minor_sharp">A minor</option>
+  <option value="1_major_flat">Bb Major</option>
+  <option value="1_minor_flat">Bb minor</option>
+  <option value="2_major_sharp">B Major</option>
+  <option value="2_minor_sharp">B minor</option>
+  <option value="3_major_sharp">C Major</option>
+  <option value="3_minor_flat">C minor</option>
+  <option value="4_major_sharp">C# Major</option>
+  <option value="4_minor_sharp">C# minor</option>
+  <option value="4_major_flat">Db Major</option>
+  <option value="4_minor_flat">Db minor</option>
+  <option value="5_major_sharp">D Major</option>
+  <option value="5_minor_flat">D minor</option>
+  <option value="6_major_flat">Eb Major</option>
+  <option value="6_minor_flat">Eb minor</option>
+  <option value="7_major_sharp">E Major</option>
+  <option value="7_minor_sharp">E minor</option>
+  <option value="8_major_flat">F Major</option>
+  <option value="8_minor_flat">F minor</option>
+  <option value="9_major_sharp">F# Major</option>
+  <option value="9_minor_sharp">F# minor</option>
+  <option value="10_major_sharp">G Major</option>
+  <option value="10_minor_sharp">G minor</option>
+  <option value="11_major_flat">Ab Major</option>
+  <option value="11_minor_flat">Ab minor</option>
+  <option value="11_major_sharp">G# Major</option>
+  <option value="11_minor_sharp">G# minor</option>
+</select>
+{# <a href="{{path('triad', {'x': x, 'shfl': shfl, 'mode': mode} ) }}" id="go">Show triads</a> #}
+
+<table>
+  <tr>
+    <td>{{thirds_and_fifths[0][2]}}</td>
+    <td>{{thirds_and_fifths[1][2]}}</td>
+    <td>{{thirds_and_fifths[2][2]}}</td>
+    <td>{{thirds_and_fifths[3][2]}}</td>
+    <td>{{thirds_and_fifths[4][2]}}</td>
+    <td>{{thirds_and_fifths[5][2]}}</td>
+    <td>{{thirds_and_fifths[6][2]}}</td>
+  </tr>
+  <tr>
+    <td>{{thirds_and_fifths[0][1]}}</td>
+    <td>{{thirds_and_fifths[1][1]}}</td>
+    <td>{{thirds_and_fifths[2][1]}}</td>
+    <td>{{thirds_and_fifths[3][1]}}</td>
+    <td>{{thirds_and_fifths[4][1]}}</td>
+    <td>{{thirds_and_fifths[5][1]}}</td>
+    <td>{{thirds_and_fifths[6][1]}}</td>
+  </tr>
+  <tr>
+    <td>{{key_members['tonic'][0]}}</td>
+    <td>{{key_members['supertonic'][0]}}</td>
+    <td>{{key_members['mediant'][0]}}</td>
+    <td>{{key_members['subdominant'][0]}}</td>
+    <td>{{key_members['dominant'][0]}}</td>
+    <td>{{key_members['submediant'][0]}}</td>
+    <td>{{key_members['leading_note'][0]}}</td>
+  </tr>
+  {% if (key_members['tonic'][1] == 'major') %}
+  	{% set cap = 'upper' %}
+  {% endif %}
+  <tr>
+    <th>{% if (key_members['tonic'][1] == 'major') %} {{ 'I'|upper}} {% else %} {{ 'I'|lower }} {% endif %}</th>
+    <th>{% if (key_members['supertonic'][1] == 'major') %} {{ 'II'|upper}} {% else %} {{ 'II'|lower }} {% endif %}</th>
+    <th>{% if (key_members['mediant'][1] == 'major') or (key_members['mediant'][1] == 'aug') %} {{ 'III'|upper}} {% else %} {{ 'III'|lower }} {% endif %}</th>
+    <th>{% if (key_members['subdominant'][1] == 'major') %} {{ 'IV'|upper}} {% else %} {{ 'IV'|lower }} {% endif %}</th>
+    <th>{% if (key_members['dominant'][1] == 'major') %} {{ 'V'|upper}} {% else %} {{ 'V'|lower }} {% endif %}</th>
+    <th>{% if (key_members['submediant'][1] == 'major') %} {{ 'VI'|upper}} {% else %} {{ 'VI'|lower }} {% endif %}</th>
+    <th>{% if (key_members['leading_note'][1] == 'major') %} {{ 'VII'|upper}} {% else %} {{ 'VII'|lower }} {% endif %}</th>
+  </tr>
+</table>
+<pre>
+{# {{dump(key_members)}} #}
+{# {{dump(thirds_and_fifths)}} #}
+</pre>
+</div>
+{% endblock %}
+{% block javascripts %}
+
+	<script type="text/javascript">
+ 	$(document).on('change', '#details', function(){
+		var details = $(this).val();
+		var number = details.split("_")[0];
+		var shfl = details.split("_")[2];
+		var mode = details.split("_")[1];
+		console.log(number + ' ' + shfl + ' ' + mode);
+		window.location.replace("http://localhost:8000/triad/"+number+"/"+shfl+"/"+ mode);
+ 	})
+	</script>
+{% endblock %}
