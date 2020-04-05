@@ -26,8 +26,12 @@ class TriadController extends AbstractController
     private function createScale($x, $shfl, $mode){
     	if($shfl == 'sharp') {
     		$letters_array = [0=>'A', 1=>'A#', 2=>'B', 3=>'C', 4=>'C#', 5=>'D', 6=>'D#', 7=>'E', 8=>'F', 9=>'F#', 10=>'G', 11=>'G#'];
-    	} else {
+    	} else if ($shfl == 'flat') {
     		$letters_array = [0=>'A', 1=>'Bb', 2=>'B', 3=>'C', 4=>'Db', 5=>'D', 6=>'Eb', 7=>'E', 8=>'F', 9=>'Gb', 10=>'G', 11=>'Ab'];
+    	} else if ($shfl == '6sh') {
+    		$letters_array = [0=>'A', 1=>'A#', 2=>'B', 3=>'C', 4=>'C#', 5=>'D', 6=>'D#', 7=>'E', 8=>'E#', 9=>'F#', 10=>'G', 11=>'G#'];
+    	} else if ($shfl == '7sh') {
+    		$letters_array = [0=>'A', 1=>'A#', 2=>'B', 3=>'B#', 4=>'C#', 5=>'D', 6=>'D#', 7=>'E', 8=>'E#', 9=>'F#', 10=>'G', 11=>'G#'];    		
     	}
 		
 		
@@ -59,7 +63,7 @@ class TriadController extends AbstractController
 			$key_members['mediant'] = [$chromatic_members[3], 'aug', 3];
 			$key_members['subdominant'] = [$chromatic_members[5], 'minor', 5];
 			$key_members['dominant'] = [$chromatic_members[7], 'major', 7];
-			$key_members['submediant'] = [$chromatic_members[8], 'major', 10];
+			$key_members['submediant'] = [$chromatic_members[8], 'major', 8];
 			$key_members['leading_note'] = [$chromatic_members[11], 'dim', 11];
 
 		}

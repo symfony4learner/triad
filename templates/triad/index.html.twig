@@ -3,67 +3,55 @@
 {% block title %}Triad Generator{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 
-	table {
-	  font-family: arial, sans-serif;
-	  border-collapse: collapse;
-	  width: 100%;
-	}
 
-	td, th {
-	  border: 1px solid #dddddd;
-	  text-align: left;
-	  padding: 8px;
-	}
-
-	tr:nth-child(even) {
-	  background-color: #dddddd;
-	}
-
-</style>
-
-<div class="example-wrapper">
+<div  class="container-fluid" style="max-width:900px;">
     <h1>Triad Generator</h1>
 
-    Select a chord to display its triad family:
+    <h3>Select a chord to display its triad family:</h3>
 
-<select id="details">
+<select class="custom-select" id="details" style="max-width:300px;">
   <option value="3_major_sharp" selected >Select Key</option>
   <option value="0_major_sharp">A Major</option>
   <option value="0_minor_sharp">A minor</option>
   <option value="1_major_flat">Bb Major</option>
   <option value="1_minor_flat">Bb minor</option>
+  <option value="1_minor_7shmin">A# minor</option>
   <option value="2_major_sharp">B Major</option>
   <option value="2_minor_sharp">B minor</option>
   <option value="3_major_sharp">C Major</option>
   <option value="3_minor_flat">C minor</option>
-  <option value="4_major_sharp">C# Major</option>
+  <option value="4_major_7sh">C# Major</option>
   <option value="4_minor_sharp">C# minor</option>
   <option value="4_major_flat">Db Major</option>
   <option value="4_minor_flat">Db minor</option>
   <option value="5_major_sharp">D Major</option>
   <option value="5_minor_flat">D minor</option>
+  <option value="6_minor_6shmin">D# minor</option>
   <option value="6_major_flat">Eb Major</option>
   <option value="6_minor_flat">Eb minor</option>
   <option value="7_major_sharp">E Major</option>
   <option value="7_minor_sharp">E minor</option>
   <option value="8_major_flat">F Major</option>
   <option value="8_minor_flat">F minor</option>
-  <option value="9_major_sharp">F# Major</option>
+  <option value="9_major_6sh">F# Major</option>
   <option value="9_minor_sharp">F# minor</option>
   <option value="10_major_sharp">G Major</option>
-  <option value="10_minor_sharp">G minor</option>
+  <option value="10_minor_flat">G minor</option>
   <option value="11_major_flat">Ab Major</option>
   <option value="11_minor_flat">Ab minor</option>
   <option value="11_major_sharp">G# Major</option>
   <option value="11_minor_sharp">G# minor</option>
 </select>
-{# <a href="{{path('triad', {'x': x, 'shfl': shfl, 'mode': mode} ) }}" id="go">Show triads</a> #}
 
-<table>
+<br />
+<br />
+<br />
+<br />
+{# <a href="{{path('triad', {'x': x, 'shfl': shfl, 'mode': mode} ) }}" id="go">Show triads</a> #}
+ <span style="float:right;">Showing: <button style="color:green; font-weight:bold;">{{key_members['tonic'][0]}} {{key_members['tonic'][1]}}</button></span>
+
+<table class="table table-striped table-bordered">
   <tr>
     <td>{{thirds_and_fifths[0][2]}}</td>
     <td>{{thirds_and_fifths[1][2]}}</td>
@@ -119,7 +107,7 @@
 		var shfl = details.split("_")[2];
 		var mode = details.split("_")[1];
 		console.log(number + ' ' + shfl + ' ' + mode);
-		window.location.replace("http://localhost:8000/triad/"+number+"/"+shfl+"/"+ mode);
+		window.location.replace("https://triads.muske.co.ke/triad/"+number+"/"+shfl+"/"+ mode);
  	})
 	</script>
 {% endblock %}
